@@ -1,4 +1,4 @@
 node[:deploy].each do |application, deploy|
-  Chef::Log.info("TEST TEST #{application} asdf #{deploy}")
-  Chef::Log.info(OpsWorks::ShellOut.shellout("source #{deploy[:deploy_to]}/shared/app.env; echo $MONGO_URL"))
+  cmd = "source #{deploy[:deploy_to]}/shared/app.env && cd #{deploy[:current_path]} && npm run sync"
+  Chef::Log.info(OpsWorks::ShellOut.shellout(cmd))
 end
